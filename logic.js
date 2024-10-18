@@ -148,9 +148,41 @@ function setupCityCategoryBarChart(city, cityData) {
 
 
 // Step 6: Update the pie chart for the selected city
+const excludedCategories = ['Restaurants', 'Food','Delis', 'Convenience Stores', 'Breakfast & Brunch', 
+    'Chicken Wings', 'Fast Food', 'Caterers', 'Event Planning & Services', 'Party & Event Planning', 'Venues & Event Spaces',
+    'Seafood', 'Food Delivery Services', 'Tacos', 'Sandwiches', 'Cafes', 'Bakeries', 'Specialty Food', 'Soup', 'Fruits & Veggies',
+    'Wine Bars', 'Nightlife', 'Bars', 'Sushi Bars', 'Poke', 'Salad', 'Ethnic Food', 'Comfort Food', 'Coffee & Tea', 
+    'Restaurant Supplies', 'Professional Services', 'Wholesalers', 'Desserts', 'Burgers', 'Kebab', 'Sports Bars', 'Pool Halls',
+    'Bar Crawl', 'Dive Bars', 'Tapas/Small Plates', 'Cocktail Bars', 'Gluten-Free', 'Gastropubs', 'Ramen', 'Buffets', 'Dim Sum',
+    'Steakhouses', 'Patisserie/Cake Shop', 'Macarons', 'Cheesesteaks', 'Grocery', 'Hot Dogs', 'Vegatiran', 'Beer', 'Wine & Spirits',
+    'Brasseries', 'Juice Bars & Smoothies', 'Beer Bar', 'Bubble Tea', 'Seafood Markets', 'Cheese Shops', 'Pasta Shops', 'Breweries',
+    'Imported Food', 'Wraps', 'Ice Cream & Frozen Yogurt', 'Vegan', 'Pizza', 'American (New)', 'Barbeque', 'Cantonese', 
+    'Tex-Mex', 'Lebanese', 'American (Traditional)', 'Asian Fusion', 'Halal', 'Arabic', 'Moroccan', 'Kosher', 'Venezuelan', 
+    'Portuguese', 'Peruvian', 'Laotian', 'Roman', 'Szechuan', 'Egyptian', 'Salvadoran', 'Vegetarian', 'Nicaraguan', 'Soul Food',
+    'Do-It-Yourself Food', 'Diners', 'Photography Stores & Services', 'Shopping', 'Noodles', 'Lounges', 'Hookah Bars', 
+    'Chicken Shop', 'Cafeteria', 'International', 'New Mexican Cuisine', 'Teppanyaki', 'Basque', 'Tapas Bars', 'Falafel', 
+    'Colombian', 'Live/Raw Food', 'Empanadas', 'Food Trucks', 'Internet Cafes', 'Bagels', 'Butcher', 'Farmers Market', 
+    'Beer Gardens', 'Local Flavor', 'Street Vendors', 'Food Court', 'Persian/Iranian', 'Art Galleries', 'Arts & Entertainment',
+    'Gelato', 'Flowers & Gifts', 'Creperies', 'Comedy Clubs', 'Tiki Bars', 'Personal Chefs', 'Modern European', 'Shanghainese',
+    'Karaoke', 'Cupcakes', 'Trinidian', 'Pubs', 'Irish Pub', 'Sardinian', 'Health Markets', 'Music Venues', 'Pan Asian', 
+    'Food Stands', 'Hainan', 'Active Life', 'Parks', 'Dominican', 'Afghan', 'Beverage Store', 'Dance Clubs', 'Beaches',
+    'Pop-Up Restaurants', 'Business Consulting', 'Party Equipment Rentals', 'Swimming Pools', 'Hotels & Travel', 'Tours',
+    'Cooking Classes', 'Arts & Crafts', 'Donuts', 'Wedding Planning', 'Iberian', 'Meat Shops', 'Mongolian', 'Hot Pot', 
+    'Izakaya', 'Fish & Chips', 'Food Banks', 'Local Services', 'Community Service/Non-Profit', 'African', 'Print Media', 
+    'Mass Media', 'Japanese Curry', 'Casinos', 'Tea Rooms', 'Chocolatiers & Shops', 'International Grocery', 'Filipino',
+    'Buddhist Temples', 'Himalayan/Nepalese', 'Religious Organizations', 'Herbs & Spices', 'Watches', 'Israeli', 'Argentine',
+    'Turkish', 'Sicilian', 'Brazilian', 'Brewpubs', 'Uzbek', 'Hotels', 'Social Clubs', 'Ethnic Grocery', 'Ukranian', 'Fuzhou',
+    'Coffee Roasteries', 'Polish', 'Pet Adoption'
+]; // Replace with actual category names you want to exclude
+
 function updatePieChart() {
     let selectedCity = document.getElementById('citySelect').value;
     let cityData = restaurantData.filter(restaurant => restaurant.city === selectedCity);
+
+    if (cityData.length === 0) {
+        alert('No data available for the selected city.');
+        return;
+    }
 
     let categories = {};
     cityData.forEach(restaurant => {
@@ -158,6 +190,11 @@ function updatePieChart() {
             categories[category] = (categories[category] || 0) + 1;
         });
     });
+
+    // Filter out excluded categories
+    for (const category of excludedCategories) {
+        delete categories[category];
+    }
 
     let categoryNames = Object.keys(categories);
     let categoryCounts = Object.values(categories);
@@ -168,13 +205,16 @@ function updatePieChart() {
         cityPieChart.destroy();
     }
 
+    // Generate colors dynamically
+    const backgroundColors = categoryNames.map(() => `hsl(${Math.random() * 360}, 70%, 60%)`);
+
     cityPieChart = new Chart(ctx, {
         type: 'pie',
         data: {
             labels: categoryNames,
             datasets: [{
                 data: categoryCounts,
-                backgroundColor: ['red', 'blue', 'green', 'yellow', 'purple'],
+                backgroundColor: backgroundColors,
             }]
         }
     });
