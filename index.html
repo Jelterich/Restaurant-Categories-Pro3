@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="styles.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Dashboard</title>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        #map {
+            height: 400px;
+            width: 100%;
+        }
+        .chart-container {
+            width: 50%;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Step 1: Ask the user to choose 5 restaurant categories -->
+    <div>
+        <h2>Select 5 Restaurant Categories</h2>
+        <form id="categoryForm">
+            <input type="checkbox" name="category" value="Mexican"> Mexican<br>
+            <input type="checkbox" name="category" value="Italian"> Italian<br>
+            <input type="checkbox" name="category" value="Chinese"> Chinese<br>
+            <input type="checkbox" name="category" value="Japanese"> Japanese<br>
+            <input type="checkbox" name="category" value="Mediterranean"> Mediterranean<br>
+            <input type="checkbox" name="category" value="Southern"> Southern<br>
+            <input type="checkbox" name="category" value="Thai"> Thai<br>
+            <input type="checkbox" name="category" value="Cajun/Creole"> Cajun/Creole<br>
+            <input type="checkbox" name="category" value="Vietnamese"> Vietnamese<br>
+            <input type="checkbox" name="category" value="Indian"> Indian<br>
+            <input type="checkbox" name="category" value="Latin American"> Latin American<br>
+            <input type="checkbox" name="category" value="Greek"> Greek<br>
+            <input type="checkbox" name="category" value="Caribbean"> Caribbean<br>
+            <input type="checkbox" name="category" value="Middle Eastern"> Middle Eastern<br>
+            <input type="checkbox" name="category" value="French"> French<br>
+            <input type="checkbox" name="category" value="Korean"> Korean<br>
+            <input type="checkbox" name="category" value="Spanish"> Spanish<br>
+            <input type="checkbox" name="category" value="Cuban"> Cuban<br>
+            <input type="checkbox" name="category" value="Canadien (New)"> Canadien (New)<br>
+            <input type="checkbox" name="category" value="Pakistani"> Pakistani<br>
+            <input type="checkbox" name="category" value="Irish"> Irish<br>
+            <input type="checkbox" name="category" value="Hawaiian"> Hawaiian<br>
+            <button type="button" onclick="getData()">Submit</button>
+        </form>
+    </div>
+
+    <!-- Step 2: Leaflet Map -->
+    <div id="map"></div>
+
+    <!-- Step 3: Bar chart showing cities and their most prevalent category -->
+    <div class="chart-container">
+        <canvas id="cityCategoryBarChart"></canvas>
+    </div>
+
+    <!-- Step 4: Pie chart for selected city's restaurant categories -->
+    <div class="chart-container">
+        <h3>City Category Breakdown</h3>
+        <select id="citySelect" onchange="updatePieChart()">
+            <!-- Dynamically populated -->
+        </select>
+        <canvas id="cityPieChart"></canvas>
+    </div>
+
+    <!-- Step 5: Bar chart for top 5 cities in selected category -->
+    <div class="chart-container">
+        <h3>Top 5 Cities by Category</h3>
+        <select id="categorySelect" onchange="updateTopCitiesChart()">
+            <!-- Dynamically populated -->
+        </select>
+        <canvas id="topCitiesBarChart"></canvas>
+    </div>
+
+    <!-- Link to the external JavaScript file -->
+    <script src="logic.js"></script>
+
+</body>
+</html>
