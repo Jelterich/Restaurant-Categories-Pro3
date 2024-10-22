@@ -97,7 +97,7 @@ async function createChoroplethMap() {
     try {
         // Load GeoJSON data
         const geoData = await fetch('uscities').then(response => response.json());
-        // Load your data (assuming it's in CSV format)
+        // Load your data
         const data = await d3.csv('filtered_restaurants2.csv');  // Ensure you use a CSV parsing library
 
         // Combine GeoJSON and your data
