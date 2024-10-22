@@ -14,7 +14,8 @@ Visualize the prevalence of restaurant categories by city.
 
 Enable users to explore trends through interactive visualizations.
 
-**Key Features**
+**Key Features:**
+
 Interactive User Interface: Dropdown menus for users to select specific restaurant categories and cities.  
 
 Three Types of Visualizations:  
@@ -29,13 +30,19 @@ Bar Chart: Illustrates the top 10 restaurant categories in a user-selected city.
 We are committed to presenting data in an unbiased and fair manner, ensuring accurate and objective representation of restaurant categories and cities. Proper attribution will be given to all data sources and code references to maintain transparency and intellectual integrity. Throughout the project, we will adhere to ethical guidelines to prevent misuse of data, protect intellectual property rights, and ensure responsible handling of information. Clarity and accuracy in visualizations are prioritized to avoid potential misinterpretation.
 
 ## File Structure
-flask.py: Contains the Flask application code for the backend.
-index.html: Main HTML file for the user interface.
-project.ipynb: Jupyter Notebook for exploratory data analysis and initial data processing.
-test.py: Python file to run the backend.
-chart4.html: HTML file for displaying the choropleth map visualization.
-chart4.js: JavaScript file that handles the choropleth map and its interactivity.
-MongoDB: used mongodb as database.
+flask.py: Contains the Flask application code for the backend.  
+
+index.html: Main HTML file for the user interface.  
+
+project.ipynb: Jupyter Notebook for exploratory data analysis and initial data processing.  
+
+test.py: Python file to run the backend.  
+
+chart4.html: HTML file for displaying the choropleth map visualization.  
+
+chart4.js: JavaScript file that handles the choropleth map and its interactivity.  
+
+Additional Backend: Used MongoDB as database.
 
 ## Steps to run
 
