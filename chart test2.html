@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Categories Charts</title>
+    <!-- Include Plotly.js -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <h2>Top 10 Cities With Most Restaurant Categories</h2>
+    <div id="plot1" style="width:600px;height:400px;"></div>
+    
+    <h2>Top Restaurant Categories in Selected City</h2>
+    <select id="cityDropdown" onchange="updatePieChart()"></select>
+    <div id="plot2" style="width:600px;height:400px;"></div>
+
+    <script>
+        // Fetch top cities for the bar chart
+        fetch('http://localhost:3000/top_cities')
+            .then(response => response.json())
+            .then(data => {
+                const cities = data.map(city => city.city);
+                const counts = data.map(city => city.restaurant_count);
+
+                // Create bar chart for top cities
+                const trace1 = {
+                    x: cities,
+                    y: counts,
+                    type: 'bar'
+                };
+                const layout1 = { title: "Top 10 Cities With Most Restaurant Categories" };
+                Plotly.newPlot("plot1", [trace1], layout1);
+
+                // Populate the dropdown with cities
+                const dropdown = document.getElementById('cityDropdown');
+                cities.forEach(city => {
+                    const option = document.createElement('option');
+                    option.value = city;
+                    option.textContent = city;
+                    dropdown.appendChild(option);
+                });
+
+                // Initialize the pie chart with the first city
+                updatePieChart();
+            });
+
+        // Update pie chart based on selected city
+        function updatePieChart() {
+            const city = document.getElementById('cityDropdown').value;
+            fetch(`http://localhost:3000/categories/${city}`)
+                .then(response => response.json())
+                .then(data => {
+                    const categories = Object.keys(data);
+                    const counts = Object.values(data);
+
+                    const trace2 = {
+                        labels: categories,
+                        values: counts,
+                        type: 'pie'
+                    };
+                    const layout2 = { title: `Restaurant Categories in ${city}` };
+                    Plotly.newPlot("plot2", [trace2], layout2);
+                });
+        }
+    </script>
+</body>
+</html>
