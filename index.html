@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flavor Frontier Analysts</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet.heat@0.2.0/dist/leaflet-heat.js"></script>
+    <script src="https://unpkg.com/leaflet-choropleth@1.1.4/dist/choropleth.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        .full-height {
+            height: calc(100vh - 56px);
+            overflow-y: hidden;
+        }
+        .map-row {
+            height: 40vh; /* Make map take 40% of viewport height */
+        }
+        .charts-row {
+            height: 30vh; /* Make each charts row take 30% of viewport height */
+        }
+        #map {
+            height: 100%;
+            width: 100%;
+        }
+        .chart-container {
+            position: relative;
+            height: 100%;
+            padding: 10px;
+        }
+                
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-light" style="background: linear-gradient(45deg, #875eb3, #224786);">
+        <div class="container-fluid">
+            <a class="navbar-brand">"Exploring Taste, Unlocking Insights"</a>
+            <!-- Dropdown for selecting categories -->
+            <select id="category-dropdown">
+            </select>
+        </div>
+    </nav>
+    <div class="container-fluid full-height">
+        <!-- Map row - make it taller -->
+        <div class="row map-row">  <!-- Changed class -->
+            <div class="col-12">
+                <div id="map"></div>
+            </div>
+        </div>
+        
+        <!-- Charts rows -->
+        <div class="row charts-row">  <!-- Changed class -->
+            <div class="col-md-6">
+                <div class="chart-container">
+                    <canvas id="TopCitiesChart"></canvas>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="chart-container">
+                    <canvas id="pieChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Link to external JavaScript file -->
+    <script src="flavor_frontend.js"></script>
+</body>
+</html>
+
+
+
+
+
