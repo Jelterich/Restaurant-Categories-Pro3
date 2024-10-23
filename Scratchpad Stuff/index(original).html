@@ -17,54 +17,54 @@
             padding: 0;
         }
         .full-height {
-            height: calc(100vh - 56px);
-            overflow-y: hidden;
+            height: calc(100vh - 56px); /* Adjusted for navbar height */
         }
-        .map-row {
-            height: 40vh; /* Make map take 40% of viewport height */
-        }
-        .charts-row {
-            height: 30vh; /* Make each charts row take 30% of viewport height */
+        .half-height {
+            height: 50%;
         }
         #map {
             height: 100%;
             width: 100%;
         }
-        .chart-container {
-            position: relative;
-            height: 100%;
-            padding: 10px;
-        }
-                
+        
     </style>
 </head>
 <body>
     <nav class="navbar navbar-light" style="background: linear-gradient(45deg, #875eb3, #224786);">
         <div class="container-fluid">
-            <a class="navbar-brand">"Exploring Taste, Unlocking Insights"</a>
+            <a class="navbar-brand">"Exploring Tate, Unlocking Insights"</a>
             <!-- Dropdown for selecting categories -->
             <select id="category-dropdown">
             </select>
         </div>
     </nav>
     <div class="container-fluid full-height">
-        <!-- Map row - make it taller -->
-        <div class="row map-row">  <!-- Changed class -->
+        <div class="row half-height">
             <div class="col-12">
                 <div id="map"></div>
             </div>
         </div>
-        
-        <!-- Charts rows -->
-        <div class="row charts-row">  <!-- Changed class -->
-            <div class="col-md-6">
+        <div class="row half-height">
+            <div class="col-md-6 col-lg-6">
                 <div class="chart-container">
                     <canvas id="TopCitiesChart"></canvas>
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 col-lg-6">
                 <div class="chart-container">
-                    <canvas id="pieChart"></canvas>
+                    <canvas id="TopCitiesChart4"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="row half-height">
+            <div class="col-md-6 col-lg-6">
+                <div class="chart-container">
+                    <canvas id="TopCitiesChart2"></canvas>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-6">
+                <div class="chart-container">
+                    <canvas id="TopCitiesChart3"></canvas>
                 </div>
             </div>
         </div>
