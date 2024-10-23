@@ -1,7 +1,7 @@
 let map;
 let heatLayer;
 
-// Initialize the map and set its view to a default location
+// Initialize the map
 function initMap() {
     map = L.map('map').setView([39.8283, -98.5795], 4);  // Centered on the USA
 
@@ -11,7 +11,7 @@ function initMap() {
         attribution: '© OpenStreetMap'
     }).addTo(map);
 
-    // Initialize the heat layer (will be added when data is fetched)
+    // Initialize the heat layer
     heatLayer = L.heatLayer([], { 
         radius: 35, 
         blur: 8, 
@@ -54,17 +54,17 @@ fetch('/categories')
         });
     });
 
-// Add event listener for dropdown change
+// Event listener for dropdown changes
 document.getElementById('category-dropdown').addEventListener('change', function() {
     const selectedCategory = this.value;
     function updatePieChart(data, selectedCity, selectedCategory) {
-        // Get state of selected city
+        // Get the state of the selected city
         const cityState = data.find(r => r.city === selectedCity).state;
         
-        // Get all restaurants in selected city
+        // Get all restaurants in the selected city
         const cityRestaurants = data.filter(r => r.city === selectedCity);
     
-        // Count all categories in city
+        // Count all categories in the city
         const categoryCount = {};
         cityRestaurants.forEach(restaurant => {
             const categories = restaurant.categories.split(', ');
@@ -77,14 +77,14 @@ document.getElementById('category-dropdown').addEventListener('change', function
             });
         });
     
-        // Get top 5 categories
+        // Get the top 5 categories
         const top5Categories = Object.entries(categoryCount)
             .sort((a, b) => b[1] - a[1])
             .slice(0, 5);
         const topCategories = top5Categories.map(item => item[0]);
         const categoryCounts = top5Categories.map(item => item[1]);
     
-        // Destroy old pie chart if it exists
+        // Destroy old pie chart if it exists so it recreates on city click
         if (window.myChart2 instanceof Chart) {
             window.myChart2.destroy();
         }
@@ -186,13 +186,16 @@ document.getElementById('category-dropdown').addEventListener('change', function
                 .slice(0, 5);
             const topCategories = top5Categories.map(item => item[0]);
             const categoryCounts = top5Categories.map(item => item[1]);
-            
+
+            // Delete any existing charts so they wull refresh on reselection
             if (window.myChart1 instanceof Chart) {
                 window.myChart1.destroy();
             }
+            if (window.myChart2 instanceof Chart) {
+                window.myChart2.destroy();
+            }
             
             // Create all charts
-            // top 10 cities for the selected category
             const ctx1 = document.getElementById('TopCitiesChart').getContext('2d');
             window.myChart1 = new Chart(ctx1, {
                 type: 'bar',
@@ -238,7 +241,7 @@ document.getElementById('category-dropdown').addEventListener('change', function
                 }
             });
 
-            // to 5 categories in the city with the most restaurants of the selected category
+            // top 5 categories in the city with the most restaurants of the selected category
             const ctx2 = document.getElementById('pieChart').getContext('2d');
             window.myChart2 = new Chart(ctx2, {
                 type: 'pie',

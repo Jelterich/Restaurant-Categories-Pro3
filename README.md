@@ -1,32 +1,89 @@
-# Restaurant-Categories-Pro3 Team readme file
+# Flavor Frontier Analysts
 
-#### Overview
+"Exploring Taste, Unlocking Insights" - A data visualization platform for restaurant insights across the United States.
 
-### HTML STUFF ###
+## Overview
 
-### Bootstrap
+This web application analyzes and visualizes Yelp restaurant data, providing interactive visualizations to explore restaurant categories and their geographic distribution. The application features a heat map, category-specific bar charts, and interactive pie charts showing the distribution of restaurant categories across cities.
 
-The bootstrap script gets written into the main html file, `index.html.`, to create the layout of the page by making 5 empty containers. The first container takes the top half of the page with the lower half of the page being split into 4 equal size containers.
+## Features
 
-### iframe
+- **Interactive Heat Map**: Visualizes restaurant density across the United States (40% viewport height)
+- **Top Cities Bar Chart**: Displays the top 10 cities for any selected restaurant category (30% viewport height)
+- **Category Distribution Pie Chart**: Shows top 5 categories in selected cities (30% viewport height)
+- **Interactive Features**: 
+  - Category selection dropdown
+  - Click-through functionality from bar chart to update pie chart
+  - Responsive layout design
 
-iframe allows us to treat each of the 5 created containers as their own separate pages. An html file will be made for each map, chart, and graph and assigned a container with iframe.
+## Technology Stack
 
+### Backend
+- Python Flask server
+- MongoDB database
+- JSON data processing
 
-[ Main HTML (index.html) ]
-        |
-  +-----+--------+
-  |              |
-[ Bootstrap ]  [ iframe (assigns src via JavaScript) ]
-                   |
-     +------------+------------+------------+------------+
-     |            |            |            |            |  
-[ iframe 1 ] [ iframe 2 ] [ iframe 3 ] [ iframe 4 ] [ iframe 5 ]
-(map.html) (chart1.html) (chart2.html)(chart3.html) (chart4.html) 
+### Frontend
+- HTML5/CSS3
+- JavaScript
+- External Libraries:
+  - Bootstrap 5.3.0 (UI framework)
+  - Leaflet 1.7.1 (mapping)
+  - Leaflet.heat (heat map visualization)
+  - Leaflet-choropleth (geographic data visualization)
+  - Chart.js (interactive charts)
 
+## Running the Application
 
+1. Ensure all files are in the same directory, and add the Yelp json file to the same directory.
 
-The map and each chart can be written individually like in the class activity examples from the basics of charting single graphs in html and of using leaflet and openstreetmap. Can probable just go right to the activity files from those module. We'll end up keeping the html files those created and then copying most of the JavaScript to the main javascript file.
+2. Start the Flask server:
+```bash
+python app.py
+```
 
+## Usage
 
-#### Open the complete-dashboard-sample.html in your browser to get an idea
+1. Select a restaurant category from the dropdown menu
+2. Observe the heat map showing restaurant density
+3. Review the bar chart showing top 10 cities for selected category
+4. Click on any city in the bar chart to update the pie chart with that city's category distribution
+
+## Data Flow
+
+1. Backend server (app.py) reads and processes the Yelp dataset
+2. Processed data is stored in MongoDB
+3. Flask server provides two main endpoints:
+   - GET /categories - Returns available restaurant categories
+   - GET /restaurants - Returns restaurant data based on selected category
+4. Frontend (flasktest2-1.js) handles:
+   - User interactions
+   - Data visualization updates
+   - Chart interactions
+
+## Directory Structure
+FLAT
+```
+
+## Future Enhancements
+
+- Additional filtering options
+- More detailed restaurant information
+- Expanded geographic analysis
+- Time-based visualizations
+- User preferences storage
+
+## License
+
+Apache
+
+## Acknowledgments
+
+- Yelp for providing the dataset
+- Contributors and maintainers of the used libraries
+
+## Contributions
+- The team shared an equal workload accross the project.
+
+---
+For questions or support, please [create an issue](your-repo-issues-link) in the repository.
