@@ -46,7 +46,17 @@ food_related_categories = [
 ]
 
 df_restaurants_clean = df_restaurants[['business_id', 'name', 'city', 'state', 'latitude', 'longitude', 'categories', 'stars']]
+# Create a proper copy first
+df_restaurants_clean = df_restaurants[['business_id', 'name', 'city', 'state', 'latitude', 'longitude', 'categories', 'stars']].copy()
 
+# Function to clean categories
+def clean_categories(categories_str):
+    if isinstance(categories_str, str):
+        categories_list = [cat.strip() for cat in categories_str.split(',')]
+        categories_list = [cat for cat in categories_list if cat not in ['Restaurant', 'Restaurants', 'Food']]
+        return ', '.join(categories_list) if categories_list else None
+    return None
+df_restaurants_clean['categories'] = df_restaurants_clean['categories'].apply(clean_categories)
 collection.delete_many({})
 
 if collection.count_documents({}) == 0:
